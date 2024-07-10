@@ -12008,6 +12008,7 @@ p {
 
 .hero-scene * {
   position: relative; /* Assurez-vous que les enfants sont devant le ::before */
+  margin-bottom: 15px;
 }
 
 .hero-scene-content {
@@ -12025,7 +12026,7 @@ p {
 /* Styles pour la section image-card */
 .image-card {
   position: relative;
-  overflow: hidden; /* Assurez-vous que l'image reste contenue */
+  overflow: hidden;
 }
 
 .image-card img {
@@ -12048,4 +12049,8 @@ p {
 
 .image-card:hover img {
   filter: brightness(0.3);
+}
+
+.form-label {
+  color: #906427;
 }/*# sourceMappingURL=main.css.map */

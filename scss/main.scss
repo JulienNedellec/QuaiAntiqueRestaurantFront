@@ -43,6 +43,7 @@ p {
 
 .hero-scene * {
     position: relative; /* Assurez-vous que les enfants sont devant le ::before */
+    margin-bottom: 15px;
 }
 
 .hero-scene-content {
@@ -83,4 +84,8 @@ p {
 
 .image-card:hover img {
     filter: brightness(0.3);
+}
+
+.form-label{
+    color: $primary;
 }
