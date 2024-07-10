@@ -1,55 +1,86 @@
+/* Assurez-vous d'importer correctement les feuilles de style */
 @import url("/node_modules/bootstrap-icons/font/bootstrap-icons.css");
 @import 'custom';
 
-html{
+/* Styles généraux pour html, main, footer, etc. */
+html {
     position: relative;
     min-height: 100%;
 }
 
-main{
+main {
     margin-bottom: 250px;
 }
 
-footer.footer{
+footer.footer {
     padding: 15px;
     position: absolute;
     bottom: 0;
     width: 100%;
 }
 
-p{
+p {
     font-family: $font-family-serif;
     font-size: 18px;
 }
 
-.hero-scene{
+/* Styles pour la section hero-scene */
+.hero-scene {
     position: relative;
-    &::before{
-        content:"";
-        position: absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background-image: url(../images/FondHeroScene.jpg);
-        background-size: cover;
-        filter: brightness(0.3);
-    }
-    
-    *{
-        //Positionner les éléments devant le ::before
-        position:relative;
-    }
-    
-    .hero-scene-content{
-        height: 300px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+}
 
-    .text-justify{
-        text-align: justify;
-    }
+.hero-scene::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/FondHeroScene.jpg);
+    background-size: cover;
+    filter: brightness(0.3);
+}
+
+.hero-scene * {
+    position: relative; /* Assurez-vous que les enfants sont devant le ::before */
+}
+
+.hero-scene-content {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+/* Styles pour la section image-card */
+.image-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-card img {
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.image-card .titre-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.image-card:hover .titre-image {
+    opacity: 1;
+}
+
+.image-card:hover img {
+    filter: brightness(0.3);
 }

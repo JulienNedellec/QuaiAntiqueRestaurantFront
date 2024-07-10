@@ -1,4 +1,5 @@
 @charset "UTF-8";
+/* Assurez-vous d'importer correctement les feuilles de style */
 @import url("/node_modules/bootstrap-icons/font/bootstrap-icons.css");
 /*!
  * Bootstrap  v5.3.3 (https://getbootstrap.com/)
@@ -11966,6 +11967,7 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+/* Styles généraux pour html, main, footer, etc. */
 html {
   position: relative;
   min-height: 100%;
@@ -11987,9 +11989,11 @@ p {
   font-size: 18px;
 }
 
+/* Styles pour la section hero-scene */
 .hero-scene {
   position: relative;
 }
+
 .hero-scene::before {
   content: "";
   position: absolute;
@@ -12001,16 +12005,47 @@ p {
   background-size: cover;
   filter: brightness(0.3);
 }
+
 .hero-scene * {
-  position: relative;
+  position: relative; /* Assurez-vous que les enfants sont devant le ::before */
 }
-.hero-scene .hero-scene-content {
+
+.hero-scene-content {
   height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.hero-scene .text-justify {
+
+.text-justify {
   text-align: justify;
+}
+
+/* Styles pour la section image-card */
+.image-card {
+  position: relative;
+  overflow: hidden; /* Assurez-vous que l'image reste contenue */
+}
+
+.image-card img {
+  width: 100%;
+  transition: all 0.3s;
+}
+
+.image-card .titre-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.image-card:hover .titre-image {
+  opacity: 1;
+}
+
+.image-card:hover img {
+  filter: brightness(0.3);
 }/*# sourceMappingURL=main.css.map */
