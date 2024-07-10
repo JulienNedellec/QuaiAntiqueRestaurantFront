@@ -30,13 +30,16 @@
                             <a class="nav-link" href="#">La carte</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/allResa">Les réservations</a>
+                            <a class="nav-link" href="/allResa" data-show="admin">Les réservations</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/account">Mon compte</a>
+                            <a class="nav-link" href="/account" data-show="admin" data-show="client">Mon compte</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" data-show="disconnected">
                             <a class="nav-link" href="/signin">Connexion</a>
+                        </li>
+                        <li class="nav-item" data-show="connected">
+                            <a class="nav-link" id="signout-btn">Déconnexion</a>
                         </li>
                     </ul>
                 </div>
@@ -66,6 +69,7 @@
             </div>
         </div>
     </footer>
+    <script src="js/script.js"></script>
     <script type="module" src="Router/router.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
