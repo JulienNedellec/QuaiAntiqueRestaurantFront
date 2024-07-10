@@ -64,7 +64,7 @@ p {
     overflow: hidden;
 }
 
-.image-card img {
+.image-card img{
     width: 100%;
     transition: all 0.3s;
 }
@@ -78,7 +78,19 @@ p {
     transition: opacity 0.3s;
 }
 
-.image-card:hover .titre-image {
+.action-image-buttons{
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.image-card:hover .titre-image, .action-image-buttons:hover {
     opacity: 1;
 }
 
