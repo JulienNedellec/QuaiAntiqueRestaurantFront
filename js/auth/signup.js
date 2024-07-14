@@ -119,7 +119,7 @@ function inscrireUtilisateur(){
         
     })
     .then((result) => {
-        alert("Bravo" + dataForm.get("Prenom") + " " + dataForm.get("Nom") + " vous êtes inscrit");
+        alert("Bravo " + dataForm.Prenom + " " + dataForm.Nom + " vous êtes inscrit");
         document.location.href = "/signin";
     })
     .catch((error) => console.error(error));
