@@ -13,56 +13,54 @@ const getRouteByUrl = (url) => {
 const loadContentPage = async () => {
   const path = window.location.pathname;
   const actualRoute = getRouteByUrl(path);
-  
+
   const { authorize } = actualRoute;
-  if (authorize.length > 0) {
-    if (authorize.includes("disconnected") && isConnected()) {
-      window.location.replace("/");
-      return;
+  if (authorize.includes("disconnected") && isConnected()) {
+    window.location.replace("/");
+    return;
+  }
+
+  try {
+    const response = await fetch(actualRoute.pathHtml);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
-    
-    try {
-      const response = await fetch(actualRoute.pathHtml);
-      const html = await response.text();
-      document.getElementById("main-page").innerHTML = html;
-      
-      if (actualRoute.pathJS) {
-        const scriptTag = document.createElement("script");
-        scriptTag.type = "text/javascript";
-        scriptTag.src = actualRoute.pathJS;
-        document.body.appendChild(scriptTag);
-      }
-      
-      document.title = `${actualRoute.title} - ${websiteName}`;
-      showAndHideElementsForRoles();
-    } catch (error) {
-      console.error('Error loading content:', error);
+    const html = await response.text();
+    document.getElementById("main-page").innerHTML = html;
+
+    if (actualRoute.pathJS) {
+      const scriptTag = document.createElement("script");
+      scriptTag.type = "text/javascript";
+      scriptTag.src = actualRoute.pathJS;
+      document.body.appendChild(scriptTag);
     }
-  };
-  
-  // Fonction pour gérer les événements de routage (clic sur les liens)
-  const routeEvent = (event) => {
+
+    document.title = `${actualRoute.title} - ${websiteName}`;
+    showAndHideElementsForRoles();
+  } catch (error) {
+    console.error('Error loading content:', error);
+  }
+};
+
+// Fonction pour gérer les événements de routage (clic sur les liens)
+const routeEvent = (event) => {
+  const href = event.target.getAttribute('href');
+  if (href && href.startsWith('/')) {
     event.preventDefault();
-    const { href } = event.target;
-    if (href) {
-      window.history.pushState({}, "", href);
-      loadContentPage();
-    }
-  };
-  
-  // Gestion de l'événement de retour en arrière dans l'historique du navigateur
-  window.addEventListener('popstate', loadContentPage);
-  
-  // Assignation de la fonction routeEvent à la propriété route de la fenêtre
-  window.route = routeEvent;
-  
-  // Ajout de gestionnaires d'événements aux liens
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', routeEvent);
-    });
+    window.history.pushState({}, "", href);
+    loadContentPage();
+  }
+};
+
+// Gestion de l'événement de retour en arrière dans l'historique du navigateur
+window.addEventListener('popstate', loadContentPage);
+
+// Ajout de gestionnaires d'événements aux liens après que le DOM est chargé
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', routeEvent);
   });
-  
+
   // Chargement du contenu de la page au chargement initial
   loadContentPage();
-}
+});
