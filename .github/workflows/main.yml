@@ -1,0 +1,37 @@
+name: 🚀 Deploy website on push
+
+on: 
+  push:
+    branches:
+      - master  # Specify the branch to trigger the deployment
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install npm dependencies
+      run: npm install
+      
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ftp-djoudj78.alwaysdata.net
+        username: djoudj78
+        password: ${{ secrets.ftp_password }}
+        protocol: 'ftps'  # Ensure FTPS is used
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/bootstrap/scss/**
+          **/node_modules/bootstrap/js/**
+          **/node_modules/bootstrap-icons/icons/**  
+        server-dir: /www/
