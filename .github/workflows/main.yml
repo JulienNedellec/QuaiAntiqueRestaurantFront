@@ -1,5 +1,10 @@
-on : push
 name: 🚀 Deploy website on push
+
+on: 
+  push:
+    branches:
+      - master  # Specify the branch to trigger the deployment
+
 jobs:
   web-deploy:
     name: 🎉 Deploy
@@ -7,12 +12,16 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v3
+      with:
+        ref: master  # Explicitly specify the branch to check out
+
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ftp-djoudj78.alwaysdata.net
         username: djoudj78
         password: ${{ secrets.ftp_password }}
+        protocol: 'ftps'  # Ensure FTPS is used
         exclude: |
           **/.git*
           **/.git*/**
